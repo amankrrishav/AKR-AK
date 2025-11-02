@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+/* Carousel: side-to-side auto-slide + arrows */
+(function() {
+  const track = document.querySelector('.carousel-track');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const leftBtn = document.querySelector('.carousel-arrow.left');
+  const rightBtn = document.querySelector('.carousel-arrow.right');
+
+  if (!track || cards.length === 0) return;
+
+  let idx = 0;
+  const cardWidth = cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(cards[0]).marginRight || 0);
+  const visibleCount = Math.floor((document.querySelector('.carousel-viewport').offsetWidth) / cardWidth) || 1;
+  let maxIndex = Math.max(0, cards.length - visibleCount);
+
+  function moveTo(i) {
+    idx = Math.max(0, Math.min(i, maxIndex));
+    track.style.transform = 'translateX(' + (-idx * cardWidth) + 'px)';
+  }
+
+  // Arrow handlers
+  leftBtn && leftBtn.addEventListener('click', () => moveTo(idx - 1));
+  rightBtn && rightBtn.addEventListener('click', () => moveTo(idx + 1));
+
+  // Auto-slide
+  let autoplayInterval = 3500;
+  let autoTimer = setInterval(() => {
+    if (idx >= maxIndex) moveTo(0);
+    else moveTo(idx + 1);
+  }, autoplayInterval);
+
+  // Pause on hover (desktop)
+  const carouselWrap = document.querySelector('.carousel-wrap');
+  carouselWrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  carouselWrap.addEventListener('mouseleave', () => {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      if (idx >= maxIndex) moveTo(0);
+      else moveTo(idx + 1);
+    }, autoplayInterval);
+  });
+
+  // Recalculate on resize
+  window.addEventListener('resize', () => {
+    const newCardWidth = cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(cards[0]).marginRight || 0);
+    // recalc visible count and maxIndex safely
+    const viewportWidth = document.querySelector('.carousel-viewport').offsetWidth;
+    const newVisible = Math.max(1, Math.floor(viewportWidth / newCardWidth));
+    maxIndex = Math.max(0, cards.length - newVisible);
+    moveTo(Math.min(idx, maxIndex));
+  });
+})();
+</script>
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AKR&AK — Where Every Choice Tells a Story</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts for Brand Typography -->
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="https://i.ibb.co/j9kky9jh/image11.png" alt="AKR&AK Logo">
+        <span>DROGHERS HUB!</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Find curated stories...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="nav-actions">
+        <button class="login-btn">Login</button>
+        <a href="#"><i class="fas fa-shopping-cart"></i></a>
+        <button class="seller-btn">Become a Seller</button>
+      </div>
+    </nav>
+    <div class="category-bar">
+      <div class="cat-item"><i class="fas fa-gem"></i><span>Crafted Treasures</span></div>
+      <div class="cat-item"><i class="fas fa-tshirt"></i><span>Wearable Stories</span></div>
+      <div class="cat-item"><i class="fas fa-palette"></i><span>Artistry</span></div>
+      <div class="cat-item"><i class="fas fa-home"></i><span>Home Accents</span></div>
+      <div class="cat-item"><i class="fas fa-mug-hot"></i><span>Living</span></div>
+      <div class="cat-item"><i class="fas fa-leaf"></i><span>Nature</span></div>
+    </div>
+  </header>
+
+  <!-- Hero Banner Section -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>Where Every Choice Tells a Story</h1>
+      <p>
+        Born from a spark, shaped by passion,<br>
+        AK & AK is more than a name — it’s a connection.<br>
+        Between craft and care, trend and tradition,<br>
+        We weave dreams into every transaction.<br><br>
+        From the first click to the final touch,<br>
+        We believe quality should never rush.<br>
+        A haven where style meets soul,<br>
+        And every product plays its role.<br><br>
+        Driven by vision, refined by art,<br>
+        We bring the world’s best, handpicked from heart.<br>
+        AKR&AK — your digital marketplace divine,<br>
+        Where commerce meets creation, line by line.
+      </p>
+      <a href="#" class="shop-btn">Shop Stories</a>
+    </div>
+    <img src="[Provide the Image link]" alt="Marketplace Hero">
+  </section>
+
+  <!-- Featured Products / Section 2 (example, replace images/text as per your input) -->
+  <section class="offers-section">
+    <h2>Featured Curations</h2>
+    <div class="offers-list">
+      <div class="offer-card">
+        <img src="https://i.ibb.co/5XB7QhWT/nikeshoe.webp" alt="Nike shoe">
+        <span>Nike
+Tiempo Legend 10 Academy Multi-Ground Low-Top Men Football Boots</span>
+        <small>Rs.3500/-</small>
+      </div>
+      <div class="offer-card">
+        <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80" alt="Statement Necklace">
+        <span>Whisper Necklace</span>
+        <small>Signature piece</small>
+      </div>
+      <div class="offer-card">
+        <img src="https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=400&q=80" alt="Ethnic Throw">
+        <span>Ethnic Throw</span>
+        <small>Woven dreams</small>
+      </div>
+      <div class="offer-card">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80" alt="Home Accent">
+        <span>Home Accent</span>
+        <small>Finishing touch</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Sections -->
+  <!-- Add the remaining five sections here as you provide specifics -->
+  
+  <!-- Video + Review Section -->
+<section class="video-section">
+  <div class="video-container inner-content">
+    <div class="video-text">
+      <h2>Watch Review for the Product.</h2>
+      <p>Hear from our customers and see the product in action — authentic reviews that help you decide with confidence.</p>
+    </div>
+
+    <div class="video-frame-wrap" aria-hidden="false">
+      <!-- YouTube embed: autoplay, muted, loop, no controls -->
+      <iframe
+        src="https://www.youtube.com/embed/Rb1xUAUTfCQ?rel=0&controls=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=Rb1xUAUTfCQ"
+        title="Product Review"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Clients / Testimonials Carousel -->
+<section class="clients-section">
+  <div class="inner-content section-header">
+    <h2 class="section-title">What Our Clients Say</h2>
+  </div>
+
+  <div class="carousel-wrap inner-content">
+    <button class="carousel-arrow left" aria-label="Previous testimonial">&larr;</button>
+
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="avatar"><i class="fas fa-user-circle"></i></div>
+          <p class="quote">"Fantastic quality and fast delivery — the product exceeded expectations."</p>
+          <strong class="client-name">— Ayesha R.</strong>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="avatar"><i class="fas fa-user-circle"></i></div>
+          <p class="quote">"Customer service was attentive and helped me choose the right size."</p>
+          <strong class="client-name">— Vikram S.</strong>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="avatar"><i class="fas fa-user-circle"></i></div>
+          <p class="quote">"Packaging was lovely and product felt premium — will buy again."</p>
+          <strong class="client-name">— M. Patel</strong>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <div class="avatar"><i class="fas fa-user-circle"></i></div>
+          <p class="quote">"Great value for money. The review videos were helpful before purchasing."</p>
+          <strong class="client-name">— S. Nair</strong>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-arrow right" aria-label="Next testimonial">&rarr;</button>
+  </div>
+</section>
+
+ 
+  
+  <!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-left">
+    <h2>Let's Connect</h2>
+    <form class="vertical-form" action="https://submit-form.com/VpNkw5oRC" method="POST">
+      <label for="first-name">First name</label>
+      <input id="first-name" name="first-name" type="text" required />
+
+      <label for="last-name">Last name</label>
+      <input id="last-name" name="last-name" type="text" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" cols="15" rows="5" required></textarea>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="contact-right">
+    <!-- Use a smiley SVG for aesthetic and performance -->
+    <div class="smiley-bg">
+      <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="110" cy="110" r="110" fill="#ffe6a7"/>
+        <ellipse cx="72" cy="82" rx="12" ry="17" fill="#432818"/>
+        <ellipse cx="148" cy="82" rx="12" ry="17" fill="#432818"/>
+        <path d="M60 130 Q110 185 160 130" stroke="#432818" stroke-width="8" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <p>
+      AKR&AK — Where commerce meets creation, line by line.<br>
+      &copy; 2025 AKR&AK. Crafted with care.
+    </p>
+  </div>
+</footer>
