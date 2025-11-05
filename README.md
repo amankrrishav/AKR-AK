@@ -18,4 +18,7 @@ Where commerce meets creation.
 **** STOPPED THIS WEB DEV ****
            06/11/2025
            
-****STARTED NEW WEB DEV USING REACT AND VITE**** USING More JavaScript
+**** ****STARTED NEW WEB DEV USING REACT AND VITE**** **** Lang: JavaScript
+           05/11/2025
+
+        *****************
