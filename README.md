@@ -13,3 +13,9 @@ Driven by vision, refined by art,
 We bring the world’s best, handpicked from heart.
 AKR & AK — your digital marketplace divine,
 Where commerce meets creation.
+
+
+**** STOPPED THIS WEB DEV ****
+           06/11/2025
+           
+****STARTED NEW WEB DEV USING REACT AND VITE**** USING More JavaScript
